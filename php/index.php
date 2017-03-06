@@ -43,7 +43,7 @@ La spedizione costa 10 euro, gli sconti si sovrappongono.
       if(isset($_POST["Nike"])){
         $Prezzo += $Nike;
       }
-      echo $Prezzo;
+      echo "Prezzo finale:  ". $Prezzo;
     }
   ?>
 
