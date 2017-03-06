@@ -27,6 +27,7 @@ La spedizione costa 10 euro, gli sconti si sovrappongono.
   </form>
 
   <?php
+
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
       $Hogan = $_POST["Hogan"];
       $Nike = $_POST["Nike"];
@@ -34,15 +35,16 @@ La spedizione costa 10 euro, gli sconti si sovrappongono.
       $Prezzo = 0;
       if(isset($_POST["Sconto"])){
         $Prezzo += $Sconto;
-      }
+      }//Se selezionato sconto diminuisce il prezzo finale
 
       if(isset($_POST["Hogan"])){
         $Prezzo += $Hogan;
-      }
+      }//Se selezionato hogan viene aggiunto il prezzo delle Hogan a quello finale
 
       if(isset($_POST["Nike"])){
         $Prezzo += $Nike;
-      }
+      }//Se selezionato hogan viene aggiunto il prezzo delle Nike a quello finale
+
       echo "Prezzo finale:  ". $Prezzo;
     }
   ?>
