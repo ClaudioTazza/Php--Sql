@@ -16,24 +16,24 @@ La spedizione costa 10 euro, gli sconti si sovrappongono.
 
   <form action="index.php" method="POST">
     <p>Nike 80$
-    <input type="checkbox" name="Nike"></p><br>
+    <input type="checkbox" name="Nike" value=80></p><br>
 
     <p>Hogan 20$
-    <input type="checkbox" name="Hogan"></p><br>
+    <input type="checkbox" name="Hogan" value=20></p><br>
 
     <p>Hai la carta fedeltà?
-    <input type="checkbox" name="Sconto"></p><br>
-
+    <input type="checkbox" name="Sconto" value=-10></p><br>
     <input type="submit">
   </form>
 
   <?php
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
-      $Hogan = 20;
-      $Nike = 80;
+      $Hogan = $_POST["Hogan"];
+      $Nike = $_POST["Nike"];
+      $Sconto =  $_POST["Sconto"];
       $Prezzo = 0;
       if(isset($_POST["Sconto"])){
-        $Prezzo -= 10;
+        $Prezzo += $Sconto;
       }
 
       if(isset($_POST["Hogan"])){
