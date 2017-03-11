@@ -48,20 +48,27 @@ La spedizione costa 10%, gli sconti si sovrappongono.
       $Prezzo = 0;
 
       if(isset($_POST["Hogan"])){
-        $Prezzo += $Hogan * $NHogan;
-      }//Se selezionato hogan viene aggiunto il prezzo delle Hogan a quello finale
+        $PHogan = $Hogan * $NHogan;
+        echo "<h5>Hogan ". $PHogan. "€</h5>";
+        $Prezzo += $PHogan;
 
+      }//Se selezionato hogan viene aggiunto il prezzo delle Hogan a quello finale
       if(isset($_POST["Nike"])){
-        $Prezzo += $Nike * $NNike;
+        $PNike = $Nike * $NNike;
+        echo "<h5>Nike ". $PNike. "€</h5>";
+        $Prezzo += $PNike;
       }//Se selezionato hogan viene aggiunto il prezzo delle Nike a quello finale
 
       if($Prezzo < 100){
+        echo "<h5>Spedizione 50 €</h5>";
         $Prezzo += 50;
       }
 
       if(isset($_POST["Sconto"])){
+        echo "<h5>Sconto -10%</h5>";
         $Prezzo -= $Prezzo * $Sconto;
       }//Se selezionato sconto diminuisce il prezzo finale
+
 
       echo "Prezzo finale:  ". $Prezzo. "€";
     }
