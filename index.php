@@ -8,6 +8,12 @@
 
   <body>
 
+  <?php
+    $link = mysqli_init();  //Creiamo la variabile Link con la funzione mysqli_init
+    mysqli_real_connect($link, '172.17.0.3', 'root', 'toor', 'tabelle');
+    //                    VAR     IP         USER     PASS   NOMEDATABASE
+  ?>
+
   <form action="index.php" method="POST">
     <p>Nome pizza:</p>
     <input type="text" name="Nome" placeholder="Nome Pizza"><br>
@@ -17,11 +23,9 @@
 
     <input type="submit">
   </form>
+  <!-- Questo form invia il nome della pizza e il suo prezzo -->
 
   <?php
-    $link = mysqli_init();
-    mysqli_real_connect($link, '172.17.0.3', 'root', 'toor', 'tabelle');
-
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
       if(isset($_POST["ID"])){
         $ID = $_POST["ID"];
@@ -42,22 +46,25 @@
 
     $query = "SELECT * FROM pizze";
     $stmt = mysqli_prepare($link, $query);
-    mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt); #Esegue la query
     mysqli_stmt_bind_result($stmt, $IDPizza, $Nome, $Prezzo);
+    #Diciamo quali sono gli attributi delle pizze
 
     echo "<table>";
-    while (mysqli_stmt_fetch($stmt)) {
+    while (mysqli_stmt_fetch($stmt))
+    {#ciclo che viene eseguito per ogni elemento trovato dalla query
       echo "<tr>";
-      #array_push($result, array("IDPizze" => $IDPizze, "Nome" => $Nome, "Prezzo" => $Prezzo));
       echo "<td>$Nome</td><td>$Prezzo</td>";
+
     ?>
       <td>
       <form action="index.php" method="POST">
         <input type="hidden" name="ID" value="<?php echo $IDPizza; ?>">
         <input type="submit" value="&times;">
       </form>
-    </td>
-  <?php
+      </td>
+    <?php
+
       echo "</tr>";
     }
     echo "</table>";
